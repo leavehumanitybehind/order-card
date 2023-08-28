@@ -1,15 +1,19 @@
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Row, Space, Switch, Col } from "antd";
-import { getCalcValues } from "entities/order/model";
+import { getCalcValues, setCalcValue } from "entities/order/model";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Timer } from "../timer";
+import { useDispatch } from "react-redux";
 
 export const Swither = () => {
+  const dispatch = useDispatch();
+
   const [isModal, setIsModal] = useState(false);
   const [isSwither, setIsSwither] = useState(false);
   const [isActiveBtn, setIsActiveBtn] = useState("price");
-  const { to } = useSelector(getCalcValues);
+
+  const { desired_price } = useSelector(getCalcValues);
   return (
     <>
       <div className="flex mb-2">
@@ -27,39 +31,43 @@ export const Swither = () => {
 
       {isSwither && (
         <div>
-        <div className="flex items-stretch gap-2">
-          <Input type="number" prefix="IRR" value={to} />
+          <div className="flex items-stretch gap-2 mb-2">
+            <Input
+              type="number"
+              prefix="IRR"
+              value={desired_price}
+              onChange={(e) =>
+                dispatch(setCalcValue({ desired_price: +e.target.value }))
+              }
+            />
 
-          <div className="flex flex-col gap-1">
-            <button
-              type="button"
-              onClick={() => setIsActiveBtn("price")}
-              className={`${
-                isActiveBtn === "price"
-                  ? "bg-[#7346fb] text-white"
-                  : "bg-grey1 text-grey3"
-              } border border-gray2 text-xs rounded-md px-2`}
-            >
-              PRICE
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsActiveBtn("percent")}
-              className={`${
-                isActiveBtn === "percent"
-                  ? "bg-[#7346fb] text-white"
-                  : "bg-grey1 text-grey3"
-              } border border-gray2 text-xs rounded-md px-2`}
-            >
-              %
-            </button>
+            <div className="flex flex-col gap-1">
+              <button
+                type="button"
+                onClick={() => setIsActiveBtn("price")}
+                className={`${
+                  isActiveBtn === "price"
+                    ? "bg-[#7346fb] text-white"
+                    : "bg-grey1 text-grey3"
+                } border border-gray2 text-xs rounded-md px-2`}
+              >
+                PRICE
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsActiveBtn("percent")}
+                className={`${
+                  isActiveBtn === "percent"
+                    ? "bg-[#7346fb] text-white"
+                    : "bg-grey1 text-grey3"
+                } border border-gray2 text-xs rounded-md px-2`}
+              >
+                %
+              </button>
+            </div>
           </div>
-          
+          <Timer />
         </div>
-        <Timer />
-        </div>
-
-          
       )}
 
       <Modal

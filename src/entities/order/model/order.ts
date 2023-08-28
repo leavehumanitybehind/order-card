@@ -25,6 +25,7 @@ export const initialState: orderState = {
   calcValues: {
     from: 0,
     to: 0,
+    desired_price: 503415541,
     balance_percent: 0,
     timeOrder: {
       hh: "00",

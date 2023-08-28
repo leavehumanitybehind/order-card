@@ -23,6 +23,7 @@ type Balance = {
 type Values = {
   from:number,
   to:number,
+  desired_price:number,
   balance_percent:number,
   timeOrder: {
     hh:string,
