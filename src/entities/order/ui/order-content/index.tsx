@@ -5,7 +5,6 @@ import Input from "antd/es/input/Input";
 import { getBalance, getCalcValues, getCourse, setCalcValue } from "entities/order/model";
 
 import { Swither } from "features/order/switcher";
-import { Timer } from "features/order/timer";
 import { ToggleAmount } from "features/order/toggle-amount";
 import { useSelector } from "react-redux";
 
@@ -34,7 +33,7 @@ export const OrderContent = () => {
       <ToggleAmount />
       <Divider />
       <Swither />
-      <Timer />
+
       <Divider />
     </Space>
   );

@@ -7,7 +7,7 @@ import { TabItem } from "shared/libs/types";
 
 export const Tab = ({ arr }: { arr: TabItem[] }) => {
   const dispatch = useDispatch();
-  const activeTab = useSelector(getActiveTab)
+  const activeTab = useSelector(getActiveTab);
 
   return (
     <div className="w-full flex mb-4">
